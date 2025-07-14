@@ -4,7 +4,7 @@ use crate::{lexer::get_tokens, lexer::Token};
 
 
 
-
+mod peekable;
 mod lexer;
 mod parsables;
 mod runner;
