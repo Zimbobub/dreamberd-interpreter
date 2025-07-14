@@ -16,7 +16,10 @@ const FILE: &str = "suite/types.db";
 
 
 fn main() -> Result<(), std::io::Error> {
-    let src = fs::read_to_string(FILE)?;
+    // let src = fs::read_to_string(FILE)?;
+    let src: String = String::from("!!!!j");
+
+    println!("{}", src.clone());
 
     let tokens: Vec<Token> = get_tokens(src);
 

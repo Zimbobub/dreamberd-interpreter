@@ -1,18 +1,37 @@
-use crate::runner::variables::VariableType;
+use crate::{peekable::Location, runner::variables::VariableType};
 
 
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Location {
-    file: String,
-    line: usize,
-    col: usize
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct FileLocation {
+    pub file: String,
+    pub line: usize,
+    pub col: usize
 }
+
+
+
+impl Location<char> for FileLocation {
+    fn advance(&mut self, item: Option<char>) {
+        match item {
+            Some('\n') => {
+                self.col = 0;
+                self.line += 1;
+            },
+            Some(_) => {
+                self.col += 1;
+            },
+            None => {}
+        }
+    }
+}
+
+
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Token {
-    token_type: TokenType,
-    location: Location
+    pub token_type: TokenType,
+    pub location: FileLocation
 }
 
 
@@ -25,7 +44,9 @@ pub enum TokenType {
     Literal(VariableType),
     Whitespace,
     UnaryOperation(UnaryOperation),
-    BinaryOperation(BinaryOperation)
+    BinaryOperation(BinaryOperation),
+
+    Exclamation(u8)
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
