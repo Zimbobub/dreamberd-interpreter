@@ -1,7 +1,6 @@
-use crate::token::Token;
 
-
-
+mod token;
+pub use token::Token;
 
 
 pub fn get_tokens(src: &str) -> Vec<Token> {
