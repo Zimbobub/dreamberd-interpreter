@@ -23,7 +23,9 @@ pub struct Token {
 pub enum TokenType {
     Keyword(Keyword),
     Literal(VariableType),
-    Whitespace
+    Whitespace,
+    UnaryOperation(UnaryOperation),
+    BinaryOperation(BinaryOperation)
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -51,4 +53,38 @@ pub enum Keyword {
     Class,  // can be `class` or `className`
 
     Reverse,
+}
+
+
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum UnaryOperation {
+    Not,
+    Negate
+}
+
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum BinaryOperation {
+    Add,
+    Sub,
+    Mul,
+    Div,
+    Mod,
+
+    Eq1,
+    Eq2,
+    Eq3,
+    Eq4,
+
+    NotEq1,
+    NotEq2,
+    NotEq3,
+    NotEq4,
+
+    GreaterThan,
+    GreaterThanOrEq,
+
+    LessThan,
+    LessThanOrEq,
 }
